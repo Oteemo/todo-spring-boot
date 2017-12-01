@@ -17,28 +17,28 @@ pipeline {
                 }
             }
         }
-        stage('Long-running Verification') {
-            environment {
-                SONAR_LOGIN = credentials('Sonar-Login-Token')
-            }
-            parallel {
-                stage('Integration Tests') {
-                    steps {
-                        gradlew('integrationTest')
-                    }
-                    post {
-                        always {
-                            junit '**/build/test-results/integrationTest/TEST-*.xml'
-                        }
-                    }
-                }
-                stage('Code Analysis') {
-                    steps {
-                        gradlew('sonarqube')
-                    }
-                }
-            }
-        }
+        // stage('Long-running Verification') {
+        //     environment {
+        //         SONAR_LOGIN = credentials('Sonar-Login-Token')
+        //     }
+        //     parallel {
+        //         stage('Integration Tests') {
+        //             steps {
+        //                 gradlew('integrationTest')
+        //             }
+        //             post {
+        //                 always {
+        //                     junit '**/build/test-results/integrationTest/TEST-*.xml'
+        //                 }
+        //             }
+        //         }
+        //         stage('Code Analysis') {
+        //             steps {
+        //                 gradlew('sonarqube')
+        //             }
+        //         }
+        //     }
+        // }
         stage('Assemble') {
             steps {
                 gradlew('assemble')
