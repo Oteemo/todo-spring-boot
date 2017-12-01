@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Push to S3'){
           steps{
-            withAws(credentials:'aws-cli-creds'){
+            withAWS(credentials:'aws-cli-creds'){
               s3Upload(file:'todo-1.0.0.war', bucket:'swf-spring-boot', path:'build/libs/todo-1.0.0.war')
             }
           }
