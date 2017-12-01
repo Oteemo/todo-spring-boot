@@ -4,6 +4,10 @@ plugins {
 
 apply plugin: 'war'
 
+springBoot {
+  executable = true
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -14,7 +18,7 @@ war {
 
 apply from: "$rootDir/gradle/integration-test.gradle"
 apply from: "$rootDir/gradle/code-analysis.gradle"
-apply from: "$rootDir/gradle/deploy.gradle"
+// apply from: "$rootDir/gradle/deploy.gradle"
 
 repositories {
     mavenCentral()
@@ -23,9 +27,9 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    runtime('com.h2database:h2')
-    runtime('javax.servlet:jstl')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper')
+    compile('com.h2database:h2')
+    compile('javax.servlet:jstl')
+    compile('org.springframework.boot:spring-boot-starter-tomcat')
+    compile('org.apache.tomcat.embed:tomcat-embed-jasper')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

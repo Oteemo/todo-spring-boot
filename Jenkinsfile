@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        pollSCM('*/5 * * * *')
-    }
-
     stages {
         stage('Compile') {
             steps {
@@ -23,7 +19,7 @@ pipeline {
         }
         stage('Long-running Verification') {
             environment {
-                SONAR_LOGIN = credentials('SONARCLOUD_TOKEN')
+                SONAR_LOGIN = credentials('Sonar-Login-Token')
             }
             parallel {
                 stage('Integration Tests') {
@@ -46,30 +42,16 @@ pipeline {
         stage('Assemble') {
             steps {
                 gradlew('assemble')
-                stash includes: '**/build/libs/*.war', name: 'app'
             }
         }
-        stage('Promotion') {
-            steps {
-                timeout(time: 1, unit:'DAYS') {
-                    input 'Deploy to Production?'
-                }
+        stage('Push to S3'){
+          steps{
+            withAws(credentials:'aws-cli-creds'){
+              s3Upload(file:'todo-1.0.0.war', bucket:'swf-spring-boot', path:'build/libs/todo-1.0.0.war')
             }
+          }
         }
-        stage('Deploy to Production') {
-            environment {
-                HEROKU_API_KEY = credentials('HEROKU_API_KEY')
-            }
-            steps {
-                unstash 'app'
-                gradlew('deployHeroku')
-            }
-        }
-    }
-    post {
-        failure {
-            mail to: 'benjamin.muschko@gmail.com', subject: 'Build failed', body: 'Please fix!'
-        }
+
     }
 }
 
