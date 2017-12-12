@@ -57,7 +57,7 @@ pipeline {
             ansibleTower(
               towerServer: 'Dev Tower',
               jobTemplate: 'Deploy Spring Boot'
-              )
+            )
           }
         }
 
