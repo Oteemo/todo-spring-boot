@@ -56,14 +56,7 @@ pipeline {
           steps{
             ansibleTower(
               towerServer: 'Dev Tower',
-              jobTemplate: 'Deploy Spring Boot',
-              importTowerLogs: true,
-              inventory: 'Spring Boot',
-              jobTags: '',
-              limit: '',
-              removeColor: false,
-              verbose: true,
-              credential: ''
+              jobTemplate: 'Deploy Spring Boot'
               )
           }
         }
