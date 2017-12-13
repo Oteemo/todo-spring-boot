@@ -1,8 +1,20 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '1.5.6.RELEASE'
 }
 
 apply plugin: 'war'
+apply plugin: org.sonarqube.gradle.SonarQubePlugin
 
 springBoot {
   executable = true
@@ -32,4 +44,12 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-tomcat')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://sonar-sonarqube.management:9000/'
+        property 'sonar.login', System.getenv('SONAR_LOGIN')
+        properties['sonar.tests'] += sourceSets.integrationTest.java.srcDirs
+    }
 }
