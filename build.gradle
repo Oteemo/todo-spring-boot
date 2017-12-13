@@ -51,6 +51,6 @@ sonarqube {
         property 'sonar.projectName', 'todo-spring-boot'
         property 'sonar.host.url', 'http://sonar-sonarqube.management:9000/'
         property 'sonar.login', System.getenv('SONAR_LOGIN')
-        properties['sonar.tests'] += sourceSets.integrationTest.java.srcDirs
+        // properties['sonar.tests'] += sourceSets.integrationTest.java.srcDirs
     }
 }
