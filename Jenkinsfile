@@ -1,5 +1,5 @@
 pipeline {
-    agent
+    agent any
 
     environment {
       SONAR_LOGIN = credentials('Sonar-Login-Token')
