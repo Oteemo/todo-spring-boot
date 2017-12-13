@@ -28,8 +28,8 @@ war {
     version = '1.0.0'
 }
 
-apply from: "$rootDir/gradle/integration-test.gradle"
-apply from: "$rootDir/gradle/code-analysis.gradle"
+// apply from: "$rootDir/gradle/integration-test.gradle"
+// apply from: "$rootDir/gradle/code-analysis.gradle"
 // apply from: "$rootDir/gradle/deploy.gradle"
 
 repositories {
@@ -48,6 +48,7 @@ dependencies {
 
 sonarqube {
     properties {
+        property 'sonar.projectName', 'todo-spring-boot'
         property 'sonar.host.url', 'http://sonar-sonarqube.management:9000/'
         property 'sonar.login', System.getenv('SONAR_LOGIN')
         properties['sonar.tests'] += sourceSets.integrationTest.java.srcDirs
