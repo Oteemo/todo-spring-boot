@@ -14,17 +14,23 @@ plugins {
 }
 
 apply plugin: 'war'
+<<<<<<< Updated upstream
+=======
+apply plugin: 'maven-publish'
+apply plugin: 'org.springframework.boot'
+>>>>>>> Stashed changes
 apply plugin: org.sonarqube.gradle.SonarQubePlugin
 
 springBoot {
   executable = true
+  classifier = 'boot'
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 war {
-    baseName = 'todo'
+    baseName = 'todo-spring'
     version = '1.0.0'
 }
 
@@ -33,7 +39,45 @@ war {
 // apply from: "$rootDir/gradle/deploy.gradle"
 
 repositories {
+<<<<<<< Updated upstream
     mavenCentral()
+=======
+  maven {
+    credentials {
+      username "$nexusUser"
+      password "$nexusPass"
+    }
+    url "$nexusURL"
+  }
+}
+
+project.tasks.findAll { it.name.startsWith("publish") } .each { it.dependsOn assemble }
+
+publishing {
+  publications {
+    mavenJava(MavenPublication){
+      version = '1.0.0'
+      artifactId = 'todo-spring'
+      groupId = 'com.swf'
+      // "boot" jar
+      artifact ("$buildDir/libs/$project.name-$version-boot.war") {
+        classifier = 'boot'
+      }
+    }
+  }
+}
+
+publishing {
+  repositories {
+    maven {
+      url "https://nexus.oteemo-swf.com/repository/cbp-releases/"
+      credentials {
+        username "$nexusUser"
+        password "$nexusPass"
+      }
+    }
+  }
+>>>>>>> Stashed changes
 }
 
 dependencies {
