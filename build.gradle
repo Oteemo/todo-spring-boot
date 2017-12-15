@@ -14,11 +14,8 @@ plugins {
 }
 
 apply plugin: 'war'
-<<<<<<< Updated upstream
-=======
 apply plugin: 'maven-publish'
 apply plugin: 'org.springframework.boot'
->>>>>>> Stashed changes
 apply plugin: org.sonarqube.gradle.SonarQubePlugin
 
 springBoot {
@@ -39,9 +36,6 @@ war {
 // apply from: "$rootDir/gradle/deploy.gradle"
 
 repositories {
-<<<<<<< Updated upstream
-    mavenCentral()
-=======
   maven {
     credentials {
       username "$nexusUser"
@@ -77,7 +71,6 @@ publishing {
       }
     }
   }
->>>>>>> Stashed changes
 }
 
 dependencies {
