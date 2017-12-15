@@ -27,7 +27,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 war {
-    baseName = 'todo-spring'
+    baseName = 'todo-spring-boot'
     version = '1.0.0'
 }
 
@@ -51,11 +51,10 @@ publishing {
   publications {
     mavenJava(MavenPublication){
       version = '1.0.0'
-      artifactId = 'todo-spring'
+      artifactId = 'todo-spring-boot'
       groupId = 'com.swf'
       // "boot" jar
       artifact ("$buildDir/libs/$project.name-$version-boot.war") {
-        classifier = 'boot'
       }
     }
   }
