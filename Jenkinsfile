@@ -49,8 +49,8 @@ pipeline {
 
         stage('Run AWX playbook'){
           steps{
-            milestone(1)
-            input('Deploy via AWX?')
+            // milestone(1)
+            // input('Deploy via AWX?')
             ansibleTower(
               towerServer: 'Dev Tower',
               jobTemplate: 'Deploy Spring Boot'
