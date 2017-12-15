@@ -3,12 +3,14 @@ pipeline {
 
     environment {
       SONAR_LOGIN = credentials('Sonar-Login-Token')
+      GRADLE_PROPS = credentials('Nexus-Gradle-Props')
     }
 
     stages {
         stage('Compile') {
             steps {
-                gradlew('clean', 'classes')
+              sh('cp $GRADLE_PROPS gradle.properties')
+              gradlew('clean', 'classes')
             }
         }
         stage('Unit Tests') {
