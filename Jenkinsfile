@@ -33,13 +33,6 @@ pipeline {
                 gradlew('assemble')
             }
         }
-        // stage('Push to S3'){
-        //   steps{
-        //     withAWS(credentials:'aws-cli-creds'){
-        //       s3Upload(file:'build/libs/todo-1.0.0.war', bucket:'swf-spring-boot', path:'todo-1.0.0.war')
-        //     }
-        //   }
-        // }
 
         stage('Push to nexus'){
           steps{
