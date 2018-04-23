@@ -63,7 +63,7 @@ publishing {
 publishing {
   repositories {
     maven {
-      url "https://nexus.oteemo-swf.com/repository/cbp-releases/"
+      url "https://nexus.oteemo-swf.com/repository/maven-releases/"
       credentials {
         username "$nexusUser"
         password "$nexusPass"
